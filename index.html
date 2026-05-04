@@ -4,22 +4,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexus & Planify Labs</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://bfriasdicent-oss.github.io/nexus/favicon.png">
+    
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; background: #000000; color: white; padding: 50px; }
-        .container { max-width: 500px; margin: auto; border: 1px solid #333; padding: 20px; border-radius: 15px; background: #111; }
-        h1 { color: #00f2ea; }
-        .btn { display: block; width: 80%; margin: 20px auto; padding: 15px; text-decoration: none; border-radius: 10px; font-weight: bold; transition: 0.3s; }
-        .btn-planify { background: #ff0050; color: white; }
-        .btn-nexus { background: white; color: black; }
-        .btn:hover { transform: scale(1.05); opacity: 0.8; }
+        :root {
+            --primary: #00f2ea;
+            --secondary: #ff0050;
+            --bg: #0a0a0a;
+            --card: #141414;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: var(--card);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid #222;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            max-width: 450px;
+            width: 90%;
+            /* Animación de entrada */
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, var(--primary), #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .thanks-msg {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 16px;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-planify {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .btn-nexus {
+            background-color: white;
+            color: black;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            filter: brightness(1.1);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Nexus & Planify Labs</h1>
-        <p>Elige una de nuestras herramientas para empezar:</p>
-        <a href="https://bfriasdicent-oss.github.io/planify/" class="btn btn-planify">📅 Abrir Planify (Agenda)</a>
-        <a href="https://bfriasdicent-oss.github.io/nexus/" class="btn btn-nexus">🔢 Abrir Nexus (Calculadora)</a>
+        <p class="thanks-msg">
+            Agradecemos sinceramente su visita. <br>
+            Por favor, seleccione la herramienta que desea utilizar.
+        </p>
+        
+        <div class="btn-group">
+            <a href="https://bfriasdicent-oss.github.io/planify/" class="btn btn-planify">Acceder a Planify</a>
+            <a href="https://bfriasdicent-oss.github.io/nexus/" class="btn btn-nexus">Acceder a Nexus</a>
+        </div>
     </div>
 </body>
 </html>
