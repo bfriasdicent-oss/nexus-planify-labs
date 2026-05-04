@@ -3,37 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus & Planify Labs | Innovación Digital</title>
+    <title>Nexus & Planify Labs | Futuro Digital</title>
+    
+    <!-- Favicon de Nexus -->
     <link rel="icon" type="image/png" href="https://bfriasdicent-oss.github.io/nexus/favicon.png">
+    
+    <!-- Librerías de Animación y Gráficos -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --primary: #00f2ea;
-            --secondary: #ff0050;
-            --dark: #050505;
-            --card-bg: rgba(20, 20, 20, 0.8);
+            --nexus-blue: #00d2ff;
+            --planify-pink: #ff0050;
+            --dark-bg: #030305;
+            --card-glass: rgba(255, 255, 255, 0.03);
+            --accent-gradient: linear-gradient(135deg, var(--nexus-blue), var(--planify-pink));
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--dark);
-            color: white;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--dark-bg);
+            color: #ffffff;
             overflow-x: hidden;
-            line-height: 1.6;
         }
 
-        /* Fondo Animado de Partículas */
-        #particles-js {
+        /* Fondo de malla animada */
+        .grid-bg {
             position: fixed;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+            background-size: 40px 40px;
             z-index: -1;
+            mask-image: radial-gradient(ellipse at center, black, transparent 80%);
         }
 
-        header {
+        /* Hero Section */
+        .hero {
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -41,171 +50,201 @@
             align-items: center;
             text-align: center;
             padding: 20px;
+            background: radial-gradient(circle at top right, rgba(0, 210, 255, 0.1), transparent 40%),
+                        radial-gradient(circle at bottom left, rgba(255, 0, 80, 0.1), transparent 40%);
         }
 
-        .hero-title {
-            font-size: clamp(2.5rem, 8vw, 5rem);
+        .hero h1 {
+            font-size: clamp(3rem, 10vw, 6rem);
             font-weight: 800;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            line-height: 1;
+            margin-bottom: 20px;
+            background: var(--accent-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
         }
 
-        .welcome-msg {
-            font-size: 1.2rem;
-            color: #aaa;
-            max-width: 600px;
-            margin-bottom: 30px;
-        }
-
-        .section {
-            padding: 100px 20px;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid #333;
+        /* Secciones de Discurso */
+        .discourse-box {
+            max-width: 800px;
+            margin: 100px auto;
             padding: 40px;
-            border-radius: 20px;
-            transition: 0.4s;
-            backdrop-filter: blur(10px);
-        }
-
-        .card:hover {
-            border-color: var(--primary);
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0, 242, 234, 0.2);
-        }
-
-        .stats {
-            display: flex;
-            justify-content: space-around;
             text-align: center;
-            background: linear-gradient(90deg, #111, #1a1a1a);
-            padding: 50px 0;
-            margin: 50px 0;
+            border-left: 2px solid var(--nexus-blue);
+            background: var(--card-glass);
+            border-radius: 0 20px 20px 0;
         }
 
-        .stat-item h3 { font-size: 2.5rem; color: var(--primary); }
+        .discourse-box p {
+            font-size: 1.2rem;
+            color: #ccc;
+            font-style: italic;
+        }
 
-        .btn {
+        /* Gráficos comparativos */
+        .chart-container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 30px;
+            background: #0a0a0c;
+            border-radius: 24px;
+            border: 1px solid #222;
+        }
+
+        /* Cards de Proyectos */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            padding: 50px 10%;
+        }
+
+        .project-card {
+            background: var(--card-glass);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 30px;
+            padding: 40px;
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--nexus-blue);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .btn-action {
             display: inline-block;
-            padding: 15px 40px;
-            border-radius: 50px;
+            margin-top: 25px;
+            padding: 15px 35px;
+            border-radius: 15px;
             text-decoration: none;
-            font-weight: 600;
-            margin-top: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             transition: 0.3s;
         }
 
-        .btn-p { background: var(--secondary); color: white; }
-        .btn-n { background: white; color: black; }
+        .nexus-btn { background: var(--nexus-blue); color: #000; }
+        .planify-btn { background: var(--planify-pink); color: #fff; }
 
-        .btn:hover { opacity: 0.9; transform: scale(1.05); }
+        /* Donaciones */
+        .donation-section {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(to bottom, transparent, rgba(255, 0, 80, 0.05));
+        }
+
+        .paypal-btn {
+            background: #ffc439;
+            color: #000;
+            padding: 20px 50px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .paypal-btn:hover { transform: scale(1.1); box-shadow: 0 0 30px rgba(255, 196, 57, 0.4); }
 
         footer {
-            padding: 50px;
+            padding: 60px;
             text-align: center;
-            border-top: 1px solid #222;
-            color: #555;
+            opacity: 0.5;
+            font-size: 0.8rem;
         }
     </style>
 </head>
 <body>
 
-    <div id="particles-js"></div>
+    <div class="grid-bg"></div>
 
-    <header>
-        <h1 class="hero-title" data-aos="zoom-in">Gracias por confiar en nosotros</h1>
-        <p class="welcome-msg" data-aos="fade-up" data-aos-delay="200">
-            En Nexus & Planify Labs, transformamos tus necesidades diarias en soluciones digitales de alto rendimiento.
-        </p>
-        <div data-aos="fade-up" data-aos-delay="400">
-            <a href="#proyectos" class="btn btn-p">Explorar Herramientas</a>
+    <section class="hero">
+        <h1 data-aos="zoom-out">Gracias por su confianza.</h1>
+        <p style="font-size: 1.5rem; color: #888;" data-aos="fade-up">Nexus & Planify Labs</p>
+        <div style="margin-top: 40px;" data-aos="fade-up" data-aos-delay="400">
+            <a href="#about" class="btn-action nexus-btn">Conocer mi historia</a>
         </div>
-    </header>
+    </section>
 
-    <div class="stats" data-aos="fade-up">
-        <div class="stat-item">
-            <h3 class="counter">99.9</h3>
-            <p>% Precisión</p>
+    <div id="about" class="discourse-box" data-aos="fade-right">
+        <p>"Soy solo un pequeño emprendedor con el sueño de crear herramientas que marquen la diferencia. Mi objetivo no es solo hacer negocios, sino ser mejor persona cada día a través del servicio a los demás. Para lograrlo, su apoyo es mi mayor motor."</p>
+    </div>
+
+    <section class="section">
+        <h2 style="text-align: center; margin-bottom: 30px;">Rendimiento Superior</h2>
+        <div class="chart-container" data-aos="flip-up">
+            <canvas id="performanceChart"></canvas>
         </div>
-        <div class="stat-item">
-            <h3 class="counter">0.1</h3>
-            <p>Seg de Respuesta</p>
+    </section>
+
+    <div class="discourse-box" data-aos="fade-left" style="border-left: none; border-right: 2px solid var(--planify-pink);">
+        <p>"Cada línea de código en mis herramientas está pensada para su comodidad. Mientras más avanzamos, más pulimos los detalles para que usted tenga lo mejor."</p>
+    </div>
+
+    <div class="projects-grid">
+        <!-- Nexus Card -->
+        <div class="project-card" data-aos="fade-up">
+            <h2 style="color: var(--nexus-blue); font-size: 2.5rem;">Nexus</h2>
+            <p style="margin: 20px 0; color: #aaa;">La precisión llevada al límite. Diseñada para cálculos escolares complejos donde cada decimal cuenta. Rapidez instantánea sin margen de error.</p>
+            <a href="https://bfriasdicent-oss.github.io/nexus/" class="btn-action nexus-btn">Usar Nexus</a>
         </div>
-        <div class="stat-item">
-            <h3 class="counter">2</h3>
-            <p>Apps Activas</p>
+
+        <!-- Planify Card -->
+        <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+            <h2 style="color: var(--planify-pink); font-size: 2.5rem;">Planify</h2>
+            <p style="margin: 20px 0; color: #aaa;">Su tiempo es su recurso más valioso. Planify organiza sus tareas para que el cumplimiento de sus metas sea un proceso fluido y sin estrés.</p>
+            <a href="https://bfriasdicent-oss.github.io/planify/" class="btn-action planify-btn">Usar Planify</a>
         </div>
     </div>
 
-    <section id="proyectos" class="section">
-        <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 50px;" data-aos="fade-right">Nuestros Logros</h2>
-        
-        <div class="grid">
-            <!-- Planify -->
-            <div class="card" data-aos="fade-up">
-                <h2 style="color: var(--secondary);">Planify</h2>
-                <p style="margin: 20px 0;">¿Sientes que el tiempo se te escapa? Utiliza Planify para agendar tus tareas de forma inteligente. Logra una organización impecable y cumple tus metas diarias sin estrés.</p>
-                <ul>
-                    <li>✓ Gestión de tareas en tiempo real</li>
-                    <li>✓ Interfaz optimizada para productividad</li>
-                    <li>✓ Enfoque en cumplimiento de objetivos</li>
-                </ul>
-                <a href="https://bfriasdicent-oss.github.io/planify/" class="btn btn-p">Abrir Planify</a>
-            </div>
-
-            <!-- Nexus -->
-            <div class="card" data-aos="fade-up" data-aos-delay="200">
-                <h2 style="color: var(--primary);">Nexus</h2>
-                <p style="margin: 20px 0;">La rapidez es nuestra prioridad. Nexus es una herramienta súper rápida y precisa, diseñada para cálculos escolares exactos incluso con decimales complejos. Olvídate de los errores manuales.</p>
-                <ul>
-                    <li>✓ Cálculos instantáneos</li>
-                    <li>✓ Soporte para decimales precisos</li>
-                    <li>✓ Diseño minimalista y funcional</li>
-                </ul>
-                <a href="https://bfriasdicent-oss.github.io/nexus/" class="btn btn-n">Abrir Nexus</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" style="text-align: center;" data-aos="zoom-in">
-        <h2>Beneficios de nuestra infraestructura</h2>
-        <p style="color: #888; margin: 20px auto; max-width: 700px;">
-            Nuestras aplicaciones están optimizadas para ejecutarse en cualquier dispositivo, garantizando que siempre tengas acceso a tus herramientas de planificación y cálculo sin retrasos.
-        </p>
+    <section class="donation-section" data-aos="zoom-in">
+        <h2 style="margin-bottom: 20px;">¿Desea apoyar este proyecto?</h2>
+        <p style="margin-bottom: 40px; color: #aaa;">Su apoyo económico me ayuda a seguir desarrollando herramientas gratuitas y potentes para todos.</p>
+        <button class="paypal-btn" onclick="alert('¡Gracias! Próximamente habilitado (Ya casi me entregan mi tarjeta).')">Donar vía PayPal</button>
     </section>
 
     <footer>
-        <p>Desarrollado por Nexus & Planify Labs &copy; 2026</p>
+        <p>Nexus & Planify Labs &copy; 2026 | Santo Domingo, RD</p>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        AOS.init({ duration: 1000, once: true });
+        AOS.init({ duration: 1200, once: false });
 
-        /* Configuración de Partículas */
-        particlesJS('particles-js', {
-            "particles": {
-                "number": { "value": 80 },
-                "color": { "value": "#ffffff" },
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.2 },
-                "size": { "value": 3 },
-                "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.1, "width": 1 },
-                "move": { "enable": true, "speed": 2 }
+        // Configuración del Gráfico de Barras
+        const ctx = document.getElementById('performanceChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Precisión Decimal', 'Velocidad de Carga', 'Eficiencia de Tareas'],
+                datasets: [{
+                    label: 'Nexus & Planify',
+                    data: [99.8, 98, 95],
+                    backgroundColor: 'rgba(0, 210, 255, 0.6)',
+                    borderColor: '#00d2ff',
+                    borderWidth: 2,
+                    borderRadius: 10
+                }, {
+                    label: 'Otras Genéricas',
+                    data: [70, 65, 60],
+                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                    borderColor: '#444',
+                    borderWidth: 2,
+                    borderRadius: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true, grid: { color: '#222' }, ticks: { color: '#888' } },
+                    x: { ticks: { color: '#fff' } }
+                },
+                plugins: { legend: { labels: { color: '#fff', font: { size: 14 } } } }
             }
         });
     </script>
